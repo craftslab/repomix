@@ -11,8 +11,8 @@ npm install
 npm run repomix
 
 # Build package
-mkdir repomix-"$version"
-cp -r bin lib -t repomix-"$version"
-zip -r repomix-"$version".zip repomix-"$version"
+mkdir release
+cp -r bin lib -t release
+zip -r release.zip release
 
 popd || exit
