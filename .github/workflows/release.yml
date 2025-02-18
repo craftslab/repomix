@@ -12,17 +12,17 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        os: [ubuntu-latest]
         node-version: [18.x, 19.x, 20.x, 21.x, 22.x, 23.x]
     steps:
       - name: '📄 Checkout source'
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: '🔧 Use Node.js ${{ matrix.node-version }}'
+      - name: '🔧 Use Node.js ${{matrix.node-version}}'
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{matrix.node-version}}
       - name: '🔤 Set env'
         run: |
           TAG_NAME=${GITHUB_REF#refs/*/}
@@ -31,13 +31,13 @@ jobs:
           echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
       - name: '📦 Release package'
         shell: bash
-        run: ./release.sh ${{ env.VERSION_NAME }}
+        run: ./release.sh ${{env.VERSION_NAME}}
       - name: '🚀 Upload package'
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.REPOMIX_TOKEN }}
+          repo_token: ${{secrets.REPOMIX_TOKEN}}
           file: repomix/release.zip
-          asset_name: repomix-${{ env.VERSION_NAME }}-node-${{ matrix.node-version }}-${{ matrix.os }}.zip
-          tag: ${{ github.ref }}
+          asset_name: repomix-${{env.VERSION_NAME}}-node-${{matrix.node-version}}.zip
+          tag: ${{github.ref}}
           overwrite: true
-          body: "Repomix ${{ env.VERSION_NAME }} released"
+          body: "Repomix ${{env.VERSION_NAME}} released"
