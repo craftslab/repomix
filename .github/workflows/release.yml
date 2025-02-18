@@ -37,7 +37,7 @@ jobs:
         with:
           repo_token: ${{ secrets.REPOMIX_TOKEN }}
           file: repomix/release.zip
-          asset_name: repomix-${{ env.VERSION_NAME }}-${{ matrix.os }}-amd64.zip
+          asset_name: repomix-${{ env.VERSION_NAME }}-node-${{ matrix.node-version }}-${{ matrix.os }}.zip
           tag: ${{ github.ref }}
           overwrite: true
           body: "Repomix ${{ env.VERSION_NAME }} released"
